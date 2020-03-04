@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://git.ringcentral.com/rcvdevops/rc_sdk.git",
     packages=setuptools.find_packages(),
+    install_requires=['pubnub', 'requests'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: GPL",
