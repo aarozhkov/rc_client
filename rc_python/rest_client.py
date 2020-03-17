@@ -60,7 +60,7 @@ class RestClient(object):
         return r
 
     def refresh(self):
-        if self.token == None:
+        if self.token is None:
             return
         data = {
             'grant_type': 'refresh_token',
@@ -169,8 +169,11 @@ class RestClient(object):
         try:
             r.raise_for_status()
         except:
-            raise Exception('HTTP status code: {0}\n\n{1}'.format(
-                r.status_code, r.text))
+            raise Exception(
+                'HTTP Status: {s} RCRequestId\n{h} Body: {t}'.format(
+                    s=r.status_code,
+                    t=r.text,
+                    h=r.headers.get('RCRequestId', None)))
         return r
 
 
