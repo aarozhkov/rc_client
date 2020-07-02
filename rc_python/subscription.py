@@ -3,6 +3,7 @@ from threading import Timer
 
 from Cryptodome.Cipher import AES
 from pubnub.callbacks import SubscribeCallback
+from pubnub.enums import PNReconnectionPolicy
 from pubnub.pnconfiguration import PNConfiguration
 from pubnub.pubnub import PubNub as PubNubSDK
 
@@ -60,6 +61,7 @@ class PubNub(object):
         pnconfig.subscribe_key = self.subscription['deliveryMode'][
             'subscriberKey']
         pnconfig.daemon = True
+        pnconfig.reconnect_policy = PNReconnectionPolicy.EXPONENTIAL
         self.pubnub = PubNubSDK(pnconfig)
         self.pubnub.add_listener(self.callback)
         self.pubnub.subscribe().channels(
